@@ -1,228 +1,363 @@
-# Eclipse ThreadX RTOS
+<div align="center">
 
-This advanced real-time operating system (RTOS) is designed specifically for deeply embedded applications. Among the multiple benefits it provides are advanced scheduling facilities, message passing, interrupt management, and messaging services. Eclipse ThreadX RTOS has many advanced features, including picokernel architecture, preemption threshold, event chaining, and a rich set of system services.
+<img src="docs/TI_logo.jpg" width="300"><br/>
+# THREADX as RTOS
+
+</div>
+
+## Introduction to THREADX
+---
+
+Eclipse ThreadX is an advanced real-time operating system (RTOS) designed specifically for deeply embedded applications. Among the multiple benefits it provides are advanced scheduling facilities, message passing, interrupt management, and messaging services. Eclipse ThreadX RTOS has many advanced features, including picokernel architecture, preemption threshold, event chaining, and a rich set of system services.
 
 Here are the key features and modules of ThreadX:
+<div align="center">
+<img src="https://github.com/eclipse-threadx/threadx/blob/master/docs/threadx-features.png?raw=true" width="1000"><br/>
+</div>
 
-![ThreadX Key Features](./docs/threadx-features.png)
+### Components of Eclipse ThreadX
+
+The Eclipse ThreadX platform is the collection of run-time solutions including ThreadX, NetX Duo, FileX, GUIX and USBX.
+- **ThreadX** : advanced Real-Time Operating System (RTOS) designed specifically for deeply embedded applications. Among the multiple benefits ThreadX provides are advanced scheduling facilities, message passing, interrupt management, and messaging service
+- **FileX** : FileX is a high-performance FAT-compatible file system and fully integrated with ThreadX
+- **GUIX** : GUIX is a professional quality graphical user interface package, created to meet the needs of embedded systems developers
+- **NetX Duo** : NetX Duo is an advanced, Industrial Grade TCP/IP network stacks designed specifically for deeply embedded, real-time, and IoT applications
+- **USBX** : USBX is a high-performance USB host, device, and On-The-Go (OTG) embedded stack and is fully integrated with ThreadX
+- **TraceX** : TraceX is host-based analysis tool that provides developers with a graphical view of real-time system events and enabling better analysis of real-time systems.
+
+<div align="center">
+<img src="https://github.com/eclipse-threadx/rtos-docs/raw/main/rtos-docs/media/eclipse-threadx-system-components.png" width="1000"><br/>
+</div>
+
+### Reasons why the Eclipse ThreadX stands out as an RTOS:
+
+Eclipse ThreadX provides the following advantages over other real-time operating systems.
+- Most deployed RTOS : over 12 billion deployments worldwide
+- Intuitive and consistent API design
+- High efficiency : Small code footprint, Scalable code footprint based on the services used, Fast execution
+- Fastest time-to-market : Complete source code availability, Easy-to-use API, Comprehensive and advanced feature set, Quality documentation
+- Full, highest-quality source code
+- Pre-certified by TÜV and UL to many safety standards,  EAL4+ Common Criteria security certification, FIPS 140-2 Validated
+
+For more information visit Eclipse ThreadX documentation: https://github.com/eclipse-threadx/rtos-docs
+
+<div align="center">
+  <img src="https://github.com/eclipse-threadx/rtos-docs/raw/main/rtos-docs/media/partener-logo-sgs-tuv-saar.png" width="200" />
+  <img src="https://github.com/eclipse-threadx/rtos-docs/raw/main/rtos-docs/media/cru-logo-certification.png" width="200" /> 
+  <img src="https://github.com/eclipse-threadx/rtos-docs/raw/main/rtos-docs/media/eal-logo-certification.png" width="100" />
+</div>
+
+
+## Overview : TI platforms with ThreadX
+---
+Texas Instruments is empowering its following platforms with the ThreadX RTOS currently:
+- [AM243](https://www.ti.com/product/AM2434)
+- [AM62A](https://www.ti.com/product/AM62A7)
+
+This ThreadX offering is provided as part of TI's MCU+SDK codebase, which is designed with user experience and simplicity in mind. This offering includes out-of-box application examples and peripheral usage examples to help users hit the ground running.
+Please note, the threadX offering is **not** available in the TI SDKs available on ti.com, it's hosted on github currently and steps to set it up are shared in the later sections of this document.
+
+### Features of MCU+SDK
+
+- Out of Box peripheral and application Examples
+  - Peripheral Level Examples: UART, ADC, I2C, SPI etc.
+  - Application Level Examples.
+
+- Protocol stacks and middleware
+  - USBX : USB stack
+  - FileX : FAT filesystem
+  - NetX : network stack
+  - LwIP
+  - Various Industrial Protocol Stacks
+
+- Drivers and Hardware Abstraction Layer
+  - Board peripheral drivers - Flash, EEPROM, LED etc.
+  - SoC peripheral drivers - I2C, SPI, OSPI, ADC etc.
+
+- Industrial protocol firmware
+
+- OS kernel layer
+  - Driver Porting Layer(DPL) which acts as an abstraction layer between driver and OS
+  - Out of Box Support for
+    - THREADX
+    - Baremetal i.e NO RTOS builds
+
+<div align="center">
+
+<img src="docs/sdk_block.png" width="900"><br/>
+</div>
+
+### ThreadX features currently supported on TI platforms:
+
+- **AM243X**
+  - **Cores supported**: Kernel Cortex-R5 with TI toolchain split mode dual instance
+  - **Drivers**: GPIO, I2C, SPI/McSPI, UART & Timers
+  - **Filesystem and Storage**: Filex, RAMDISK, SDCard, QSPI flash (serial NOR) , GPMC(NAND), LevelX support
+  - **Networking**: NETX, Ethernet
+  - **Tools**: Sysconfig integration
+  - DMA for supported peripherals, IPC Port for ThreadX(for supported cores)
+
+- **AM62AX**
+  - **Cores supported**:
+      - Kernel Cortex-R5 with TI toolchain split mode dual instance
+      - Support for A53 core in single core configuration
+  - **Drivers**: GPIO, I2C, SPI/McSPI, UART & Timers
+  - **Filesystem and Storage**: Filex, RAMDISK, SDCard, OSPI flash (serial NAND), LevelX support
+  - **Networking**: NETX, Ethernet
+  - **Tools**: Sysconfig integration
+  - DMA for supported peripherals, IPC Port for ThreadX(for supported cores)
+
+### ThreadX Examples available in MCU+SDK:
+
+- **AM243X**
+  - **Kernel**
+    - **Hello World**: basic example to illustrate printing message on CCS console and first available virtual COM port every second
+    - **Task Switch**: examaple to show usage of ThreadX based task APIs, semaphore and delay APIs 
+  - **Filex**
+    - **Hello World**: example to demonstrate file I/O operations using the FileX file system
+  - **NetX Duo**
+    - **Enet NetxDuo CPSW Mac**: TCP/UDP IP application to illustrate ethernet based communication using CPSW as HW mechanism, using the NetxDuo stack coupled with ethernet driver- configured to run in Dual MAC mode
+    - **Enet NetxDuo CPSW Switch**: TCP/UDP IP application to illustrate ethernet based communication using CPSW as HW mechanism, using the NetxDuo stack coupled with ethernet driver- configured to run in Switch mode
+    - **Enet NetxDuo TCP Client**: Example to implement TCP Client on NetxDuo stack using netconn interface coupled with ethernet driver 
+    - **Enet NetxDuo TCP Server**: Example to implement TCP Server on NetxDuo stack using netconn interface coupled with ethernet driver 
+    - **Enet NetxDuo UDP Client**: Example to implement UDP Client on NetxDuo networking stack using BSD-Socket API coupled with ethernet driver 
+    - **Enet NetxDuo ICSSG Mac** : TCP/UDP IP application to illustrate ethernet based communication using ICSSG as HW mechanism, using the NetxDuo networking coupled with ethernet driver- configured in Mac mode
+    - **Enet NetxDuo ICSSG Switch**: TCP/UDP IP application to illustrate ethernet based communication using ICSSG as HW mechanism, using the NetxDuo networking coupled with ethernet driver- configured to run in Switch mode 
+
+- **AM62AX**
+  - **Kernel**
+    - **Hello World**: basic example to illustrate printing message on CCS console and first available virtual COM port every second
+    - **Task Switch**: examaple to show usage of ThreadX based task APIs, semaphore and delay APIs
+  - **Filex**
+    - **Hello World**: example to demonstrate file I/O operations using the FileX file system
+  - **NetX Duo**
+    - **Enet NetxDuo CPSW Mac**   : TCP/UDP IP application to illustrate ethernet based communication using CPSW as HW mechanism, using the NetxDuo stack coupled with ethernet driver- configured to run in Dual MAC mode
+    - **Enet NetxDuo CPSW Switch**: TCP/UDP IP application to illustrate ethernet based communication using CPSW as HW mechanism, using the NetxDuo stack coupled with ethernet driver- configured to run in Switch mode
+    - **Enet NetxDuo TCP Client** : Example to implement TCP Client on NetxDuo stack using netconn interface coupled with ethernet driver
+    - **Enet NetxDuo TCP Server** : Example to implement TCP Server on NetxDuo stack using netconn interface coupled with ethernet driver
+    - **Enet NetxDuo UDP Client** : Example to implement UDP Client on NetxDuo networking stack using BSD-Socket API coupled with ethernet driver
 
 ## Getting Started
-
-Eclipse ThreadX has been integrated to the semiconductor's SDKs and development environment. You can develop using the tools of choice from [STMicroelectronics](https://www.st.com/content/st_com/en/campaigns/x-cube-azrtos-azure-rtos-stm32.html), [NXP](https://www.nxp.com/design/software/embedded-software/azure-rtos-for-nxp-microcontrollers:AZURE-RTOS), [Renesas](https://github.com/renesas/azure-rtos) and [Microchip](https://mu.microchip.com/get-started-simplifying-your-iot-design-with-azure-rtos).
-
-We also provide [getting started guide](https://github.com/eclipse-threadx/getting-started) and [samples](https://github.com/eclipse-threadx/samples) using development boards from semiconductors you can build and test with.
-
-See [Overview of Eclipse ThreadX RTOS](https://github.com/eclipse-threadx/rtos-docs/blob/main/rtos-docs/threadx/overview-threadx.md) for the high-level overview. 
-
-## Repository Structure and Usage
-### Directory layout
-
-    .
-    ├── cmake                        # CMakelist files for building the project
-    ├── common                       # Core ThreadX files
-    ├── common_modules               # Core ThreadX module files
-    ├── common_smp                   # Core ThreadX SMP files
-    ├── docs                         # Documentation supplements
-    ├── ports                        # Architecture and compiler specific files. See below for directory breakdown     
-    │   ├── cortex_m7     
-    │   │   ├── iar                  # Example IAR compiler sample project
-    │   │   │   ├── example build    # IAR workspace and sample project files
-    │   │   │   ├── inc              # tx_port.h for this architecture
-    │   │   │   └── src              # Source files for this architecture
-    │   │   ├── ac6                  # Example ac6/Keil sample project
-    │   │   ├── gnu                  # Example gnu sample project
-    │   │   └── ...
-    │   └── ...        
-    ├── ports_modules                # Architecture and compiler specific files for threadX modules
-    ├── ports_smp                    # Architecture and compiler specific files for threadX SMP
-    ├── samples                      # demo_threadx.c
-    └── utility                      # Test cases and utilities
+---
+The following sections guides the user on how to get started with using ThreadX with TI's supported platforms.
 
 
-## Branches & Releases
+#### Prerequisites
 
-The master branch has the most recent code with all new features and bug fixes. It does not represent the latest General Availability (GA) release of the library. Each official release (preview or GA) will be tagged to mark the commit and push it into the Github releases tab, e.g. `v6.2-rel`.
+#### Supported HOST environments
 
-> When you see xx-xx-xxxx, 6.x or x.x in function header, this means the file is not officially released yet. They will be updated in the next release. See example below.
-```
-/**************************************************************************/
-/*                                                                        */
-/*  FUNCTION                                               RELEASE        */
-/*                                                                        */
-/*    _tx_initialize_low_level                          Cortex-M23/GNU    */
-/*                                                           6.x          */
-/*  AUTHOR                                                                */
-/*                                                                        */
-/*    Scott Larson, Microsoft Corporation                                 */
-/*                                                                        */
-/*  DESCRIPTION                                                           */
-/*                                                                        */
-/*    This function is responsible for any low-level processor            */
-/*    initialization, including setting up interrupt vectors, setting     */
-/*    up a periodic timer interrupt source, saving the system stack       */
-/*    pointer for use in ISR processing later, and finding the first      */
-/*    available RAM memory address for tx_application_define.             */
-/*                                                                        */
-/*  INPUT                                                                 */
-/*                                                                        */
-/*    None                                                                */
-/*                                                                        */
-/*  OUTPUT                                                                */
-/*                                                                        */
-/*    None                                                                */
-/*                                                                        */
-/*  CALLS                                                                 */
-/*                                                                        */
-/*    None                                                                */
-/*                                                                        */
-/*  CALLED BY                                                             */
-/*                                                                        */
-/*    _tx_initialize_kernel_enter           ThreadX entry function        */
-/*                                                                        */
-/*  RELEASE HISTORY                                                       */
-/*                                                                        */
-/*    DATE              NAME                      DESCRIPTION             */
-/*                                                                        */
-/*  09-30-2020      Scott Larson            Initial Version 6.1           */
-/*  xx-xx-xxxx      Scott Larson            Include tx_user.h,            */
-/*                                            resulting in version 6.x    */
-/*                                                                        */
-/**************************************************************************/ 
+- Ubuntu 22.04 64bit
+
+#### Clone and build from GIT
+
+##### Repo Tool Setup
+
+MCU+ SDK has multiple components (in multiple repositories) and dependencies
+(like compiler, CCS and other tools). We use repo tool from Google to manage these
+multiple repositories. Currently there is no support for native windows shells like
+CMD or Powershell. West tool is recommeded for other platforms. Windows users can rely on
+Git Bash for the repo setup. Follow the below mentioned steps to setup repo tool:
+
+Make sure [python3 is installed](https://wiki.python.org/moin/BeginnersGuide/Download) and is in your OS path.
+
+- Linux:
+  Do the following in terminal
+  ```bash
+  curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+  chmod a+x ~/bin/repo
+  echo "PATH=$HOME/bin:$PATH" >> ~/.bashrc
+  source ~/.bashrc
+  ```
+
+#### Cloning The Repositories
+
+To clone the repositories using repo tool, do below in your workarea folder:
+
+- **For am243x threadx setup**
+
+```bash
+repo init -u https://github.com/TexasInstruments/mcupsdk-manifests.git -m releases/10_01_00/am243x/mcusdk_threadx.xml -b main
 ```
 
-## Supported Architecture Ports
+- **For am62a threadx setup**
 
-### ThreadX
-```
-arc_em      cortex_a12        cortex_m0     cortex_r4
-arc_hs      cortex_a15        cortex_m23    cortex_r5
-arm11       cortex_a17        cortex_m3     cortex_r7
-arm9        cortex_a34        cortex_m33    
-c667x       cortex_a35        cortex_m4    
-linux       cortex_a5         cortex_m55
-risc-v32    cortex_a53        cortex_m7
-rxv1        cortex_a55        cortex_m85
-rxv2        cortex_a57
-rxv3        cortex_a5x
-win32       cortex_a65
-xtensa      cortex_a65ae
-            cortex_a7
-            cortex_a72
-            cortex_a73
-            cortex_a75
-            cortex_a76
-            cortex_a76ae
-            cortex_a77
-            cortex_a8
-            cortex_a9
+```bash
+repo init -u https://github.com/TexasInstruments/mcupsdk-manifests.git -m releases/10_01_00/am62ax/mcusdk_threadx.xml -b k3_main
 ```
 
-### ThreadX Modules
-[Eclipse ThreadX Modules](https://github.com/eclipse-threadx/rtos-docs/blob/main/rtos-docs/threadx-modules/chapter1.md) component provides an infrastructure for applications to dynamically load modules that are built separately from the resident portion of the application.
-```
-cortex_a35
-cortex_a35_smp
-cortex_a7
-cortex_m0+
-cortex_m23
-cortex_m3
-cortex_m33
-cortex_m4
-cortex_m7
-cortex_r4
-rxv2
+After the repo is initialized, do a
+
+```bash
+repo sync
 ```
 
-### ThreadX SMP
-[Eclipse ThreadX SMP](https://github.com/eclipse-threadx/rtos-docs/blob/main/rtos-docs/threadx/threadx-smp/chapter1.md) is a high-performance real-time SMP kernel designed specifically for embedded applications.
-```
-arc_hs_smp
-cortex_a34_smp
-cortex_a35_smp
-cortex_a53_smp
-cortex_a55_smp
-cortex_a57_smp
-cortex_a5x_smp
-cortex_a5_smp
-cortex_a65ae_smp
-cortex_a65_smp
-cortex_a72_smp
-cortex_a73_smp
-cortex_a75_smp
-cortex_a76ae_smp
-cortex_a76_smp
-cortex_a77_smp
-cortex_a78_smp
-cortex_a7_smp
-cortex_a9_smp
-linux
+This should clone all the repositories required for MCU+ SDK development. Now download and install the dependencies.
+
+Now that the dependencies are installed, you can start the repositories with a
+default branch `dev` by doing below:
+
+```bash
+repo start dev --all
 ```
 
-## Adaptation layer for ThreadX
+#### Downloading And Installing Dependencies
+---
 
-ThreadX is an advanced real-time operating system (RTOS) designed specifically for deeply embedded applications. To help ease application migration to ThreadX RTOS, Eclipse ThreadX provides [adaption layers](https://github.com/eclipse-threadx/threadx/tree/master/utility/rtos_compatibility_layers) for various legacy RTOS APIs (FreeRTOS, POSIX, OSEK, etc.).
+Note that the dependencies are also soc specific, here we take an example of am243x.
+You can replace that with **"am62ax" for AM62AX usecase**
 
-## Component dependencies
 
-The main components of ThreadX RTOS are each provided in their own repository, but there are dependencies between them, as shown in the following graph. This is important to understand when setting up your builds.
+**Option1: Download and install dependencies through script:**
 
-![dependency graph](docs/deps.png)
+Run the following from the same location where you have `mcu_plus_sdk` and `mcupsdk_setup`
+folders.
 
-> You will have to take the dependency graph above into account when building anything other than ThreadX itself.
+```bash
+./mcupsdk_setup/am243x/download_components.sh
+```
 
-### Building and using the library
+This will install all the required dependencies including Code Composer Studio (CCS).
+The script assumes that `mcu_plus_sdk` folder is in the same location from where
+you have invoked the script, and that dependencies are installed into `${HOME}/ti`
+location.
 
-Instruction for building the ThreadX as static library using Arm GNU Toolchain and CMake. If you are using toolchain and IDE from semiconductor, you might follow its own instructions to use ThreadX RTOS components as explained in the [Getting Started](#getting-started) section.
+Set up node modules by running below commands
+```bash
+cd mcu_plus_sdk
+npm ci
+cd ..
+```
 
-1. Install the following tools:
+Download and install PSDK Linux on **${HOME}/ti** directory corresponding to the platform you are using. This is not installed by the script.
 
-    * [CMake](https://cmake.org/download/) version 3.0 or later
-    * [Arm GNU Toolchain for arm-none-eabi](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
-    * [Ninja](https://ninja-build.org/)
+- [PROCESSOR-SDK-LINUX-AM62A](https://www.ti.com/tool/download/PROCESSOR-SDK-LINUX-AM62A)
 
-1. Cloning the repo
+**Option2: Download and install dependencies manually:**
 
+1. Download and install Code Composer Studio v12.8.1 from [here](https://www.ti.com/tool/download/CCSTUDIO "Code Composer Studio")
+   - Install at default folder, $HOMEC/ti
+
+2. Download and install SysConfig from [here](https://www.ti.com/tool/download/SYSCONFIG "SYSCONFIG")
+   - Install at default folder, $HOMEC/ti
+   - For AM243X download SysConfig 1.21.2, For AM62AX use SysConfig 1.20.0
+
+3. Download and install ARM-CGT-CLANG from [here](https://www.ti.com/tool/download/ARM-CGT-CLANG "ARM-CGT-CLANG")
+   - Install at default folder, $HOMEC/ti
+   - For AM243X download version: 4.0.1, for AM62AX download: 3.2.2
+
+3. Download and install GCC for Cortex A53 and ARM R5 from below link
+   - [GNU-A](https://developer.arm.com/-/media/Files/downloads/gnu-a/9.2-2019.12/binrel/gcc-arm-9.2-2019.12-mingw-w64-i686-aarch64-none-elf.tar.xz)
+   - [GNU-RM](https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2017q4/gcc-arm-none-eabi-7-2017-q4-major-win32.zip)
+   - Install at default folder, $HOMEC/ti
+
+4. Download and install Node.js v12.18.4 LTS
+  - Go to the [NodeJS Website](https://nodejs.org/en/) and use the installer to
+    download and install v12.18.4 of node. Install in the default directory.
+  - After successful installation, run an `npm ci` inside the `mcu_plus_sdk` folder like so:
     ```bash
-    $ git clone https://github.com/eclipse-threadx/threadx.git
+    $ cd mcu_plus_sdk/
+    $ npm ci
+    $ cd ../
     ```
+    This should install the node packages required for the SDK.
 
-1. Define the features and addons you need in `tx_user.h` and build together with the component source code. You can refer to [`tx_user_sample.h`](https://github.com/eclipse-threadx/threadx/blob/master/common/inc/tx_user_sample.h) as an example.
+5. Download and install doxygen,
+   - Tested with 1.8.20
+     - Download the correct version of doxygen for windows from [here](https://www.doxygen.nl/download.html)
+     - Install and add the install path, typically, C:/Program Files/doxygen/bin to your windows PATH
+   - Test by doing below on the command prompt
+     ```
+     $ doxygen -v
+     1.8.20 (<commit SHA-ID>)
+     ```
 
-1. Building as a static library
+ 6. Install OpenSSL
 
-    Each component of ThreadX RTOS comes with a composable CMake-based build system that supports many different MCUs and host systems. Integrating any of these components into your device app code is as simple as adding a git submodule and then including it in your build using the CMake `add_subdirectory()`.
+    - In Linux,
+      - There is a chance that OpenSSL is already installed. If not, here are the steps:
+      - If you have Ubuntu 22.04, do below in Linux Ubuntu shell to install openssl
+        -`$ sudo apt install openssl`
 
-    While the typical usage pattern is to include ThreadX into your device code source tree to be built & linked with your code, you can compile this project as a standalone static library to confirm your build is set up correctly.
+---
 
-    An example of building the library for Cortex-M4:
+**NOTE**
 
-    ```bash
-    $ cmake -Bbuild -GNinja -DCMAKE_TOOLCHAIN_FILE=cmake/cortex_m4.cmake .
+- In Linux, you will need to run `$HOME/ti/ccs{version}/ccs/install_scripts/install_drivers.sh` script for setting COM
+  port accesses correctly. Also add your user to groups `tty` and `dialout`. You can do
 
-    $ cmake --build ./build
-    ```
+  ```
+  sudo adduser $USER tty
+  sudo adduser $USER dialout
+  ```
 
-## Professional support
+---
 
+### Building the SDK
 
-## Licensing
+#### Basic Building With Makefiles
 
-License terms for using Eclipse ThreadX are defined in the LICENSE.txt file of this repo. Please refer to this file for all definitive licensing information.
+---
 
-## Resources
+**NOTE**
 
-The following are references to additional ThreadX RTOS resources:
+- Use `gmake` in windows, add path to gmake present in CCS at `C:\ti\ccsxxxx\ccs\utils\bin` to your windows PATH. We have
+  used `make` in below instructions.
+- Unless mentioned otherwise, all below commands are invoked from root folder of the "mcu_plus_sdk"  repository.
+- Current supported device names are am243x, and am62ax. The examples below have am243x as reference, **use "DEVICE=am62ax" for AM62AX platform**
+- You can also build components (examples, tests or libraries) in `release` or `debug`
+  profiles. To do this pass one of these values to `"PROFILE="`
 
-- **Product introduction**: https://github.com/eclipse-threadx/rtos-docs
-- **Product issues and bugs, or feature requests**: https://github.com/eclipse-threadx/threadx/issues
-- **TraceX Installer**: https://aka.ms/azrtos-tracex-installer
+---
 
-You can also check [previous questions](https://stackoverflow.com/questions/tagged/threadx-rtos+threadx) or ask new ones on StackOverflow using the `threadx-rtos` and `threadx` tags.
+1. Run the following command to create makefiles, this step is optional since this is invoked as part of other steps as well,
 
-## Security
+   ```bash
+   make gen-buildfiles DEVICE=am243x
+   ```
 
-Eclipse ThreadX provides OEMs with components to secure communication and to create code and data isolation using underlying MCU/MPU hardware protection mechanisms. It is ultimately the responsibility of the device builder to ensure the device fully meets the evolving security requirements associated with its specific use case.
+2. To see all granular build options, run
 
-## Contribution
+   ```bash
+   make -s help DEVICE=am243x
+   ```
+   This should show you commands to build specific libraries, examples or tests.
 
-Please follow the instructions provided in the [CONTRIBUTING.md](./CONTRIBUTING.md) for the corresponding repository.
+3. Make sure to build the libraries before attempting to build an example. For example,
+   to build a ThreadX Hello World example for AM243x, run the following:
+   ```bash
+   make -s -j4 libs DEVICE=am243x PROFILE=debug
+   ```
+   Once the library build is complete, to build the example run:
+   ```bash
+   make -s -C examples/kernel/threadx/hello_world/am243x-evm/r5fss0-0_threadx/ti-arm-clang/ all PROFILE=debug
+   ```
+
+4. Following are the commands to build **all libraries** and **all examples**. Valid PROFILE's are "release" or "debug"
+
+   ```bash
+   make -s -j4 clean DEVICE=am243x PROFILE=debug
+   make -s -j4 all   DEVICE=am243x PROFILE=debug
+   ```
+
+### More information on MCU+SDK ThreadX usage
+
+For more details on MCU+SDK ThreadX usage, please refer to the userguide. User guides contain information on
+
+- Building the SDK
+- EVM setup,
+- CCS Setup, loading and running examples
+- Flashing the EVM
+- SBL, ROV and much more.
+
+Note that userguides are specific to a particular device. The links for all the supported devices are given below.
+- [AM243x User Guide](https://software-dl.ti.com/mcu-plus-sdk/esd/AM243X/latest/exports/docs/api_guide_am243x/index.html)
+- [AM62A User Guide](https://software-dl.ti.com/mcu-plus-sdk/esd/AM62AX/latest/exports/docs/api_guide_am62ax/index.html)
+
+### Generate Documentation
+
+- Goto mcu_plus_sdk and type below to build the documentation for the device of interest
+
+  ```bash
+  make docs DEVICE=am243x
+  ```
+
