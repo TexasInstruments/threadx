@@ -55,7 +55,11 @@ Texas Instruments is empowering its following platforms with the ThreadX RTOS cu
 - [AM62A](https://www.ti.com/product/AM62A7)
 
 This ThreadX offering is provided as part of TI's MCU+SDK codebase, which is designed with user experience and simplicity in mind. This offering includes out-of-box application examples and peripheral usage examples to help users hit the ground running.
-Please note, the threadX offering is **not** available in the TI SDKs available on ti.com, it's hosted on github currently and steps to set it up are shared in the later sections of this document.
+
+**NOTE**
+
+- The ThreadX offering is **not** available in the TI SDKs available on ti.com, it's hosted on github currently and steps to set it up are shared in the later sections of this document.
+- **The ThreadX offering is for basic evaluation and is not officially supported on TI's public E2E forum**.
 
 ### Features of MCU+SDK
 
